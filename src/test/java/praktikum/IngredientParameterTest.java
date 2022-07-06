@@ -23,7 +23,7 @@ public class IngredientParameterTest {
 
     @Parameterized.Parameters(name = "Проверим что создан ингредиент правильно: " +
             "Тип - \"{0}\", название - \"{1}\", цена - {2}")
-    public static Object[][] dataForTest() {
+    public static Object[][] getIngredientData() {
         return new Object[][] {
                 { IngredientType.FILLING, "сыр", 2.3F},
                 { IngredientType.SAUCE, "кетчуп", 3F},
@@ -31,13 +31,12 @@ public class IngredientParameterTest {
     }
 
     @Test
-    public void paramTest() {
+    public void testCreateIngredientAndValidDate() {
         Ingredient ingredient = new Ingredient(type, name, price);
         assertEquals("Тип ингредиента отличается от указанного при создании!",
                 type, ingredient.getType());
         assertEquals("Имя ингредиента отличается от указанного при создании!",
                 name, ingredient.getName());
-        assertTrue("Цена ингредиента отличается от указанной при создании!",
-                ingredient.getPrice() == price);
+        assertEquals("Цена ингредиента отличается от указанной при создании!", ingredient.getPrice(), price, 0.0F);
     }
 }
